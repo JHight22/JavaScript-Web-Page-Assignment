@@ -1,0 +1,39 @@
+.font-color {
+    color: grey;
+}
+
+.jquery-example {
+    padding-left: 35px;
+}
+
+.col-sm {
+    font-size: x-large;
+}
+
+.form {
+    border: 2px solid grey;
+    border-radius: 15px;
+    padding-left: 15px;
+}
+
+.sale-amount-box {
+    background-color:white;
+    color: grey;
+    border: 2px solid grey;
+    border-radius: 15px;
+}
+
+.sales-tax-box {
+    background-color:white;
+    color: grey;
+    border: 2px solid grey;
+    border-radius: 15px;
+}
+
+.btn-toolbar button {
+    float: middle;
+    background-color: #1C2632;
+    border: 2px solid grey;
+    color: grey;
+    border-radius: 15px;
+}
