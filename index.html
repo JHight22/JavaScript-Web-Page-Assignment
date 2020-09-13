@@ -30,11 +30,10 @@
                         <legend>Sale Price</legend>
                         <div class="form">
                             <div>
-                                
-                                    <label>Sale Amount:</label>
-                                    <input class="sale-amount-box" type="text" id="saleAmount" name="saleAmount"
-                                        required />
-                                
+
+                                <label>Sale Amount:</label>
+                                <input class="sale-amount-box" type="text" id="saleAmount" name="saleAmount" required />
+
                                 <p>
                                     <label>Sales Tax:</label>
                                     <input class="sales-tax-box" type="text" id="salesTaxPercentage"
@@ -82,10 +81,10 @@
 
 
         $('#calculateButton').click(function () {
-             let saleAmount = $('#saleAmount').val();
-             let salesTaxPercentage = $('#salesTaxPercentage').val();
-             let salesTaxDecimal = salesTaxPercentage / 100;
-             
+            let saleAmount = $('#saleAmount').val();
+            let salesTaxPercentage = $('#salesTaxPercentage').val();
+            let salesTaxDecimal = salesTaxPercentage / 100;
+
 
             if (isNaN(saleAmount) || isNaN(salesTaxPercentage)) {
 
@@ -97,12 +96,16 @@
                 alert("Both inputs are required")
                 return;
 
+            } else if (salesTaxPercentage < 1) {
+
+                alert("The sales tax must be written as follows: 7.25 instead of .0725")
+                return;
+
             } else {
 
                 subtotal = saleAmount * salesTaxDecimal;
-            // updated js to prevent concatenation of numerical variables. Example: 2+2 was equaling 22 instead of 4 
+                // updated js to prevent concatenation of numerical variables. Example: 2+2 was equaling 22 instead of 4 
                 totalSalesPrice = ((+saleAmount) + (+subtotal)).toFixed(2);
-                
 
             }
 
