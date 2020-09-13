@@ -25,19 +25,20 @@
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                <form>
+                <form name="sales-tax-calculator">
                     <fieldset>
                         <legend>Sale Price</legend>
                         <div class="form">
                             <div>
-                                <p>
+                                
                                     <label>Sale Amount:</label>
-                                    <input class="sale-amount-box" type="text" id="saleAmount" name="saleAmount" />
-                                </p>
+                                    <input class="sale-amount-box" type="text" id="saleAmount" name="saleAmount"
+                                        required />
+                                
                                 <p>
                                     <label>Sales Tax:</label>
                                     <input class="sales-tax-box" type="text" id="salesTaxPercentage"
-                                        name="salesTaxPercentage" />
+                                        name="salesTaxPercentage" required />
                                 </p>
                             </div>
 
@@ -51,9 +52,9 @@
 
                             </div>
                             <br>
-                            <div>
-                                <output class="final-sale-price-display" id="finalSalePriceFadingProperties"
-                                    type="text"></output>
+                            <div id="outputfading">
+                                <output name="sales-tax-calculator" class="final-sale-price-display"
+                                    id="finalSalePriceFadingProperties" type="text"></output>
                             </div>
                             <br>
                         </div>
@@ -77,35 +78,44 @@
     <!-- jQuery JavaScript Code-->
     <script type="text/javascript">
 
-        $("#calculateButton").click(function () {
-            let saleAmount = $("#saleAmount").val();
-            let salesTaxPercentage = $("#salesTaxPercentage").val();
-            let salesTaxDecimal = salesTaxPercentage / 100;
+        let totalSalesPrice = 0;
+
+
+        $('#calculateButton').click(function () {
+             let saleAmount = $('#saleAmount').val();
+             let salesTaxPercentage = $('#salesTaxPercentage').val();
+             let salesTaxDecimal = salesTaxPercentage / 100;
+             
 
             if (isNaN(saleAmount) || isNaN(salesTaxPercentage)) {
 
                 alert("Both inputs must be numeric. For example: 7.25% tax must be written as 7.25");
+                return;
 
-            } else if (saleAmount === "" || salesTaxPercentage === "") {
+            } else if (saleAmount == "" || salesTaxPercentage == "") {
 
                 alert("Both inputs are required")
+                return;
 
             } else {
 
-                totalSalesPrice = (saleAmount + (saleAmount * salesTaxDecimal));
+                subtotal = saleAmount * salesTaxDecimal;
+            // updated js to prevent concatenation of numerical variables. Example: 2+2 was equaling 22 instead of 4 
+                totalSalesPrice = ((+saleAmount) + (+subtotal)).toFixed(2);
+                
 
             }
 
-            $("#finalSalePriceFadingProperties").fadeIn(2000);
-            $(".final-sale-price-display").val("$" + totalSalesPrice);
+            $('#finalSalePriceFadingProperties').text("$" + totalSalesPrice);
+            $('#finalSalePriceFadingProperties').fadeIn(2000);
         });
 
 
 
-        $("#clearButton").click(function () {
-            $("#saleAmount").val("");
-            $("#salesTaxPercentage").val("");
-            $("#finalSalePriceFadingProperties").fadeOut(2000);
+        $('#clearButton').click(function () {
+            $('#saleAmount').val("");
+            $('#salesTaxPercentage').val("");
+            $('#finalSalePriceFadingProperties').fadeOut(2000);
         });
 
 
