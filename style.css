@@ -30,6 +30,13 @@
     border-radius: 15px;
 }
 
+.final-sale-price-display {
+    background-color:white;
+    color: grey;
+    border: 2px solid grey;
+    border-radius: 15px;
+}
+
 .btn-toolbar button {
     float: middle;
     background-color: #1C2632;

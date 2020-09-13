@@ -32,31 +32,30 @@
                             <div>
                                 <p>
                                     <label>Sale Amount:</label>
-                                    <input class="sale-amount-box" type="text" placeholder="Enter sale amount here"
-                                        id="saleAmount" />
+                                    <input class="sale-amount-box" type="text" id="saleAmount" name="saleAmount" />
                                 </p>
                                 <p>
-                                    <label>Sales Tax %:</label>
-                                    <input class="sales-tax-box" type="text" placeholder="Enter sales tax % here"
-                                        id="salesTaxPercentage" />
+                                    <label>Sales Tax:</label>
+                                    <input class="sales-tax-box" type="text" id="salesTaxPercentage"
+                                        name="salesTaxPercentage" />
                                 </p>
                             </div>
 
                             <div class="btn-toolbar">
                                 <div class="mr-2">
-                                    <button onclick="clearData()">Clear</button>
+                                    <button type="button" id="clearButton">Clear</button>
                                 </div>
                                 <div>
-                                    <button onclick="calculateData()">Calculate</button>
+                                    <button type="button" id="calculateButton">Calculate</button>
                                 </div>
 
                             </div>
                             <br>
                             <div>
-                                <p>
-                                    put final sale price here
-                                </p>
+                                <output class="final-sale-price-display" id="finalSalePriceFadingProperties"
+                                    type="text"></output>
                             </div>
+                            <br>
                         </div>
                     </fieldset>
                 </form>
@@ -66,36 +65,51 @@
         </div>
     </div>
 
-
-
-    <!-- Optional JavaScript -->
-
-    <script type="text/JavaScript">
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+
+    <!-- jQuery JavaScript Code-->
+    <script type="text/javascript">
+
+        $("#calculateButton").click(function () {
+            let saleAmount = $("#saleAmount").val();
+            let salesTaxPercentage = $("#salesTaxPercentage").val();
+            let salesTaxDecimal = salesTaxPercentage / 100;
+
+            if (isNaN(saleAmount) || isNaN(salesTaxPercentage)) {
+
+                alert("Both inputs must be numeric. For example: 7.25% tax must be written as 7.25");
+
+            } else if (saleAmount === "" || salesTaxPercentage === "") {
+
+                alert("Both inputs are required")
+
+            } else {
+
+                totalSalesPrice = (saleAmount + (saleAmount * salesTaxDecimal));
+
+            }
+
+            $("#finalSalePriceFadingProperties").fadeIn(2000);
+            $(".final-sale-price-display").val("$" + totalSalesPrice);
+        });
+
+
+
+        $("#clearButton").click(function () {
+            $("#saleAmount").val("");
+            $("#salesTaxPercentage").val("");
+            $("#finalSalePriceFadingProperties").fadeOut(2000);
+        });
+
+
+    </script>
 </body>
 
 </html>
